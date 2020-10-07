@@ -65,10 +65,27 @@ public partial class 上传文件_page1 : System.Web.UI.Page
 
             if (bSave==true)
             {
-                this.Image1.ImageUrl = "~/image/" + this.FileUpload1.FileName;
-                this.FileUpload1.SaveAs("D:\\data\\"+this.FileUpload1.FileName);
-                this.Label1.Text = "文件上传成功";
+                try
+                {
+                    this.Image1.ImageUrl = "~/image/" + this.FileUpload1.FileName;
+                    this.FileUpload1.SaveAs("D:\\data\\" + this.FileUpload1.FileName);
+                    this.Label1.Text = "文件上传成功";
+                    this.Label1.Text += "<br/>";
+                    this.Label1.Text += "<li>" + "原文件路径：" + this.FileUpload1.PostedFile.FileName;
+                    this.Label1.Text += "<br/>";
+                    this.Label1.Text += "<li>" + "文件大小：" + this.FileUpload1.PostedFile.ContentLength;
+                    this.Label1.Text += "<br/>";
+                    this.Label1.Text += "<li>" + "文件类型：" + this.FileUpload1.PostedFile.ContentType;
+                }
+                catch 
+                {
+                    this.Label1.Text += "文件上传不成功";
+                }
 
+            }
+            else
+            {
+                this.Label1.Text = "只能上传后缀为.gif,.jpg,.bmp,.png的文件";
             }
         }
     }
